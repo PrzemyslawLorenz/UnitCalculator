@@ -115,8 +115,55 @@ class Speed:
 
 class Distance:
     def __init__(self):
-        print("Currency")
-        pass
+        self.className = "Distance"
+        self.options = {
+            1.: 'Metre',
+            2.: 'Angstrom',
+            3.: 'Micron',
+            4.: 'Inch',
+            5.: 'Foot',
+            6.: 'Yard',
+            7.: 'Mile (brit.)',
+            8.: 'Mile (nautical)',
+            9.: 'Light-year'
+        }
+
+        self.choice, self.choice2, self.userValue = gettingValues(self)
+
+        self.inMeters = self.toMeters()
+
+        print(self.userValue, "in", self.options[self.choice], "is",
+              self.toTarget(), "in", self.options[self.choice2])
+
+    def toMeters(self):
+        converter = {  # From : To Meters
+            'Metre': self.userValue,
+            'Angstrom': self.userValue * (10**-10),
+            'Micron': self.userValue * (10**-6),
+            'Inch': self.userValue * 0.0254,
+            'Foot': self.userValue * 0.3048,
+            'Yard': self.userValue * 0.9144,
+            'Mile (brit.)': self.userValue * 1609.344,
+            'Mile (nautical)': self.userValue * 1852,
+            'Light-year': self.userValue * 9.46 * (10**15)
+        }
+
+        return converter[self.options[self.choice]]
+
+    def toTarget(self):
+        converter = {  # To :
+            'Metre': self.inMeters,
+            'Angstrom': self.inMeters / (10**-10),
+            'Micron': self.inMeters / (10**-6),
+            'Inch': self.inMeters / 0.0254,
+            'Foot': self.inMeters / 0.3048,
+            'Yard': self.inMeters / 0.9144,
+            'Mile (brit.)': self.inMeters / 1609.344,
+            'Mile (nautical)': self.inMeters / 1852,
+            'Light-year': self.inMeters / (9.46 * (10**15))
+        }
+
+        return round(converter[self.options[self.choice2]], 2)
 
 
 class Capacity:
@@ -146,7 +193,8 @@ class Currency:
 options = {
     1.: 'Temperature',
     2.: 'Speed',
-    3.: 'Currency'
+    3.: 'Distance',
+    4.: 'Currency',
 }
 
 print("\nWhat would you like to convert?\nChoose number from below:")
