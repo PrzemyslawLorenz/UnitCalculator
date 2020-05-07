@@ -1,3 +1,19 @@
+def gettingValues(self):
+    print("\nWhich", self.className, "unit would you like to convert?")
+    for key in self.options:
+        print(int(key), ":", self.options[key])
+
+    self.choice = checking(self.options)
+
+    print("To which unit? Choose number from same options")
+    self.choice2 = checking(self.options)
+
+    print("Give me your", self.className, "value: ")
+    self.userValue = checking()
+
+    return self.choice, self.choice2, self.userValue
+
+
 def checking(options=False):
     while True:
         try:
@@ -15,7 +31,7 @@ def checking(options=False):
 
 class Temperature:
     def __init__(self):
-
+        self.className = "temperature"
         self.options = {
             1.: 'Celsius',
             2.: 'Fahrenheit',
@@ -26,34 +42,23 @@ class Temperature:
             7.: 'Réaumur',
             8.: 'Rømer'
         }
-
-        print("\nWhich temperature unit would you like to convert?")
-        for key in self.options:
-            print(int(key), ":", self.options[key])
-
-        self.choice = checking(self.options)
-
-        print("To which unit? Choose number from same options")
-        self.choice2 = checking(self.options)
-
-        print("Give me your temperature value: ")
-        self.userTemperature = checking()
+        self.choice, self.choice2, self.userValue = gettingValues(self)
 
         self.inCelsius = self.toCelsius()
 
-        print(self.userTemperature, "in", self.options[self.choice], "is",
+        print(self.userValue, "in", self.options[self.choice], "is",
               self.toTarget(), "in", self.options[self.choice2])
 
     def toCelsius(self):
         converter = {
-            'Celsius': self.userTemperature,
-            'Fahrenheit': 5 / 9 * (self.userTemperature - 32),
-            'Kelvin': self.userTemperature - 273.15,
-            'Rankine': (self.userTemperature * 5 / 9) - 273.15,
-            'Delisle': 100 - (self.userTemperature * 2 / 3),
-            'Newton': self.userTemperature * 100 / 33,
-            'Réaumur': self.userTemperature * 5 / 4,
-            'Rømer': (self.userTemperature - 7.5) * 40 / 21
+            'Celsius': self.userValue,
+            'Fahrenheit': 5 / 9 * (self.userValue - 32),
+            'Kelvin': self.userValue - 273.15,
+            'Rankine': (self.userValue * 5 / 9) - 273.15,
+            'Delisle': 100 - (self.userValue * 2 / 3),
+            'Newton': self.userValue * 100 / 33,
+            'Réaumur': self.userValue * 5 / 4,
+            'Rømer': (self.userValue - 7.5) * 40 / 21
         }
 
         return converter[self.options[self.choice]]
@@ -75,36 +80,25 @@ class Temperature:
 
 class Speed:
     def __init__(self):
-
+        self.className = "speed"
         self.options = {
             1.: 'Kilometers per hour',
             2.: 'Miles per hour',
             3.: 'Meters per second'
         }
 
-        print("\nWhich speed unit would you like to convert?")
-        for key in self.options:
-            print(int(key), ":", self.options[key])
-
-        self.choice = checking(self.options)
-
-        print("To which unit? Choose number from same options")
-
-        self.choice2 = checking(self.options)
-
-        print("Give me your speed value: ")
-        self.userSpeed = checking()
+        self.choice, self.choice2, self.userValue = gettingValues(self)
 
         self.inKmH = self.toKmH()
 
-        print(self.userSpeed, "in", self.options[self.choice], "is",
+        print(self.userValue, "in", self.options[self.choice], "is",
               self.toTarget(), "in", self.options[self.choice2])
 
     def toKmH(self):
         converter = {  # From : To Km/H
-            'Kilometers per hour': self.userSpeed,
-            'Miles per hour': self.userSpeed / 0.62137,
-            'Meters per second': self.userSpeed * 3.6
+            'Kilometers per hour': self.userValue,
+            'Miles per hour': self.userValue / 0.62137,
+            'Meters per second': self.userValue * 3.6
         }
 
         return converter[self.options[self.choice]]
@@ -117,6 +111,30 @@ class Speed:
         }
 
         return round(converter[self.options[self.choice2]], 2)
+
+
+class Distance:
+    def __init__(self):
+        print("Currency")
+        pass
+
+
+class Capacity:
+    def __init__(self):
+        print("Currency")
+        pass
+
+
+class Area:
+    def __init__(self):
+        print("Currency")
+        pass
+
+
+class Weight:
+    def __init__(self):
+        print("Currency")
+        pass
 
 
 class Currency:
