@@ -166,10 +166,54 @@ class Distance:
         return round(converter[self.options[self.choice2]], 2)
 
 
-class Capacity:
+class Volume:
     def __init__(self):
-        print("Currency")
-        pass
+        self.className = "Volume"
+        self.options = {
+            1.: 'Litre',
+            2.: 'Cubic metre',
+            3.: 'Barrel',
+            4.: 'Cubic foot',
+            5.: 'Cubic decimetre',
+            6.: 'Gallon (US)',
+            7.: 'Pint (US)',
+            8.: 'Cubic inch'
+        }
+
+        self.choice, self.choice2, self.userValue = gettingValues(self)
+
+        self.inLiters = self.toLiters()
+
+        print(self.userValue, "in", self.options[self.choice], "is",
+              self.toTarget(), "in", self.options[self.choice2])
+
+    def toLiters(self):
+        converter = {  # From : To Liters
+            'Litre': self.userValue,
+            'Cubic metre': self.userValue * 1000,
+            'Barrel': self.userValue * 158.987294928,
+            'Cubic foot': self.userValue * 28.316864592,
+            'Cubic decimetre': self.userValue * 1,
+            'Gallon (US)': self.userValue * 3.785411784,
+            'Pint (US)': self.userValue * 0.473176473,
+            'Cubic inch': self.userValue * 0.016387064
+        }
+
+        return converter[self.options[self.choice]]
+
+    def toTarget(self):
+        converter = {  # To :
+            'Litre': self.inLiters,
+            'Cubic metre': self.inLiters / 1000,
+            'Barrel': self.inLiters / 158.987294928,
+            'Cubic foot': self.inLiters / 28.316864592,
+            'Cubic decimetre': self.inLiters / 1,
+            'Gallon (US)': self.inLiters / 3.785411784,
+            'Pint (US)': self.inLiters / 0.473176473,
+            'Cubic inch': self.inLiters / 0.016387064
+        }
+
+        return round(converter[self.options[self.choice2]], 2)
 
 
 class Area:
@@ -194,7 +238,8 @@ options = {
     1.: 'Temperature',
     2.: 'Speed',
     3.: 'Distance',
-    4.: 'Currency',
+    4.: 'Volume',
+    7.: 'Currency',
 }
 
 print("\nWhat would you like to convert?\nChoose number from below:")
