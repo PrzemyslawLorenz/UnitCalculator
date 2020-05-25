@@ -200,32 +200,11 @@ class Volume:
         return round(converter[self.options[self.choice2]], 2)
 
 
-class Area:
-    def __init__(self):
-        self.choice, self.choice2, self.userValue, self.inDefault = 0, 0, 0, 0
-        pass
-
-
-class Weight:
-    def __init__(self):
-        self.choice, self.choice2, self.userValue, self.inDefault = 0, 0, 0, 0
-        pass
-
-
-class Currency:
-    def __init__(self):
-        self.choice, self.choice2, self.userValue, self.inDefault = 0, 0, 0, 0
-        pass
-
-
 options = {
     1.: 'Temperature',
     2.: 'Speed',
     3.: 'Distance',
-    4.: 'Volume',
-    5.: 'Area',
-    6.: 'Weight',
-    7.: 'Currency',
+    4.: 'Volume'
 }
 
 print("\nWhat would you like to convert?\nChoose number from below:")
